@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:security="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                http://www.springframework.org/schema/security
+                http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+    <security:global-method-security secured-annotations="enabled" />
+
+    <http auto-config="true" use-expressions="true" access-denied-page="/forbidden.htm">
+        <intercept-url pattern="/css/**" filters="none"/>
+
+
+        <form-login login-page="/login.htm" 
+                            authentication-failure-url = "/login.htm?login_error=1" 
+                            default-target-url="/forbidden.htm"/>
+        <logout logout-success-url="/login.htm" />
+        <anonymous username="guest" granted-authority="ROLE_ANONYMOUS" />
+        <remember-me  user-service-ref="accountService" />
+    </http>
+    
+    <beans:bean id="accountService" name="accountService" class="com.uploader.services.impl.AccountServiceImpl" />
+    
+    <beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <beans:property name="userDetailsService" ref="accountService"/>
+    </beans:bean>
+    
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="accountService" />
+    </authentication-manager>
+</beans:beans>
+

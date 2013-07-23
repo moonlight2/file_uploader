@@ -1,0 +1,46 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<% double rand = (Math.random() * 10);%>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta name="robots" content="index,follow"/>
+<meta name="googlebot" content="noarchive"/>
+
+<script type="text/javascript" src="<c:url value="/js/extjs/ext-all.js" ><c:param name="rand" value="" /></c:url>"></script>
+
+<link rel="StyleSheet" href="<c:url value="/js/extjs/resources/css/ext-all.css" ><c:param name="rand" value="" /></c:url>" type="text/css"/>
+<link rel="StyleSheet" href="<c:url value="/js/css/index.css" ><c:param name="rand" value="" /></c:url>" type="text/css"/>
+<link rel="StyleSheet" href="<c:url value="/js/css/my-ext-theme.css" ><c:param name="rand" value="" /></c:url>" type="text/css"/>
+<link rel="StyleSheet" href="<c:url value="/js/css/login.css" ><c:param name="rand" value="" /></c:url>" type="text/css"/>
+<link rel="StyleSheet" href="<c:url value="/js/css/xtheme-modx.css" ><c:param name="rand" value="" /></c:url>" type="text/css"/>
+<link rel="StyleSheet" href="<c:url value="/css/my.css" ><c:param name="rand" value="" /></c:url><%=rand%>" type="text/css"/>
+
+<script type="text/javascript">
+    var BASE_URL = "<%=request.getContextPath()%>";    
+</script>
+
+
+<!-- Navbar
+    ================================================== -->
+
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <ul class="nav">
+                <li>
+                    <a href="<%=request.getContextPath()%>/">Home</a>
+                </li>
+                <li>
+                    <a href="<%=request.getContextPath()%>/registration.htm">Registration</a>
+                </li>
+                <sec:authorize ifAllGranted="ROLE_USER">
+                    <li>
+                        <a href="<%=request.getContextPath()%>/logout.htm">Logout</a>
+                    </li>
+                </sec:authorize>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
